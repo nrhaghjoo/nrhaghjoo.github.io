@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Niloofar Haghjoo — Computational Biologist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    #0f1f38;
+      --navy2:   #162843;
+      --teal:    #2a9d8f;
+      --teal-lt: #3dbdad;
+      --sand:    #e9f0f5;
+      --text:    #1a2535;
+      --muted:   #5a6a80;
+      --rule:    #dce5ee;
+      --white:   #ffffff;
+      --sidebar: 280px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ── SIDEBAR ─────────────────────────────── */
+    aside {
+      width: var(--sidebar);
+      min-height: 100vh;
+      background: var(--navy);
+      position: fixed;
+      top: 0; left: 0;
+      display: flex;
+      flex-direction: column;
+      padding: 48px 32px 40px;
+      color: var(--white);
+      overflow-y: auto;
+    }
+
+    .sidebar-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.55rem;
+      line-height: 1.2;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+
+    .sidebar-title {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal-lt);
+      margin-bottom: 32px;
+      line-height: 1.5;
+    }
+
+    .sidebar-divider {
+      width: 32px;
+      height: 2px;
+      background: var(--teal);
+      margin-bottom: 32px;
+    }
+
+    nav { flex: 1; }
+
+    nav a {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      padding: 8px 0;
+      border-left: 2px solid transparent;
+      padding-left: 12px;
+      margin-left: -12px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    nav a:hover, nav a.active {
+      color: var(--white);
+      border-color: var(--teal);
+    }
+
+    .sidebar-contact {
+      margin-top: 40px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 28px;
+    }
+
+    .sidebar-contact a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.73rem;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      margin-bottom: 12px;
+      transition: color 0.2s;
+    }
+
+    .sidebar-contact a:hover { color: var(--teal-lt); }
+
+    .contact-icon {
+      width: 14px;
+      flex-shrink: 0;
+      opacity: 0.7;
+    }
+
+    /* ── MAIN CONTENT ────────────────────────── */
+    main {
+      margin-left: var(--sidebar);
+      flex: 1;
+      padding: 72px 64px 80px;
+      max-width: 860px;
+    }
+
+    section {
+      margin-bottom: 72px;
+      scroll-margin-top: 32px;
+    }
+
+    .section-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.9rem;
+      color: var(--navy);
+      margin-bottom: 24px;
+      line-height: 1.2;
+    }
+
+    p {
+      font-size: 0.93rem;
+      line-height: 1.8;
+      color: #3a4a60;
+      margin-bottom: 14px;
+    }
+
+    /* ── HERO ────────────────────────────────── */
+    #about {
+      padding-top: 8px;
+    }
+
+    .hero-headline {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.6rem;
+      line-height: 1.15;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .hero-sub {
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 28px;
+    }
+
+    .hero-rule {
+      width: 48px;
+      height: 3px;
+      background: var(--teal);
+      margin-bottom: 32px;
+    }
+
+    /* ── TAGS ────────────────────────────────── */
+    .tag-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .tag {
+      font-size: 0.71rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      padding: 5px 12px;
+      border-radius: 3px;
+      background: var(--sand);
+      color: var(--navy2);
+      border: 1px solid var(--rule);
+    }
+
+    /* ── TIMELINE ENTRIES ────────────────────── */
+    .entry {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 0 28px;
+      margin-bottom: 36px;
+      padding-bottom: 36px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .entry:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+    .entry-year {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--teal);
+      letter-spacing: 0.06em;
+      padding-top: 3px;
+      text-align: right;
+    }
+
+    .entry-body h3 {
+      font-size: 0.97rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 3px;
+    }
+
+    .entry-body .entry-where {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 10px;
+      font-style: italic;
+    }
+
+    .entry-body p {
+      font-size: 0.86rem;
+      line-height: 1.7;
+      color: #4a5a70;
+      margin-bottom: 6px;
+    }
+
+    .entry-body ul {
+      margin: 8px 0 0 16px;
+    }
+
+    .entry-body ul li {
+      font-size: 0.86rem;
+      line-height: 1.7;
+      color: #4a5a70;
+      margin-bottom: 4px;
+    }
+
+    /* ── SKILLS GRID ─────────────────────────── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 16px;
+    }
+
+    .skill-card {
+      background: var(--sand);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      padding: 18px 20px;
+    }
+
+    .skill-card-title {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 10px;
+    }
+
+    .skill-card ul {
+      list-style: none;
+    }
+
+    .skill-card ul li {
+      font-size: 0.82rem;
+      color: var(--text);
+      padding: 3px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .skill-card ul li:last-child { border-bottom: none; }
+
+    /* ── HONORS ──────────────────────────────── */
+    .honor-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--rule);
+      gap: 16px;
+    }
+
+    .honor-row:first-child { border-top: 1px solid var(--rule); }
+
+    .honor-text {
+      font-size: 0.88rem;
+      color: var(--text);
+    }
+
+    .honor-year {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--teal);
+      white-space: nowrap;
+    }
+
+    /* ── CONFERENCE PILLS ────────────────────── */
+    .conf-entry {
+      display: flex;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--rule);
+      align-items: flex-start;
+    }
+
+    .conf-year-badge {
+      font-size: 0.68rem;
+      font-weight: 700;
+      background: var(--navy);
+      color: var(--white);
+      padding: 3px 8px;
+      border-radius: 2px;
+      white-space: nowrap;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .conf-text {
+      font-size: 0.85rem;
+      color: #3a4a60;
+      line-height: 1.6;
+    }
+
+    .conf-venue {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* ── LINKS ───────────────────────────────── */
+    a.inline-link {
+      color: var(--teal);
+      text-decoration: none;
+      border-bottom: 1px solid var(--teal);
+      font-weight: 500;
+    }
+
+    a.inline-link:hover { color: var(--navy); border-color: var(--navy); }
+
+    /* ── RESPONSIVE ──────────────────────────── */
+    @media (max-width: 860px) {
+      :root { --sidebar: 0px; }
+      aside { display: none; }
+      main { margin-left: 0; padding: 40px 24px 60px; }
+      .entry { grid-template-columns: 1fr; }
+      .entry-year { text-align: left; margin-bottom: 4px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── SIDEBAR ──────────────────────────────────────────────── -->
+<aside>
+  <div class="sidebar-name">Niloofar<br>Haghjoo</div>
+  <div class="sidebar-title">Postdoctoral Researcher<br>Computational Biology & AI</div>
+  <div class="sidebar-divider"></div>
+
+  <nav>
+    <a href="#about">About</a>
+    <a href="#research">Research</a>
+    <a href="#education">Education</a>
+    <a href="#experience">Experience</a>
+    <a href="#publications">Publications</a>
+    <a href="#talks">Talks</a>
+    <a href="#skills">Skills</a>
+    <a href="#honors">Honors</a>
+  </nav>
+
+  <div class="sidebar-contact">
+    <a href="mailto:nhaghjoo@gmail.com">
+      <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+        <polyline points="22,6 12,13 2,6"/>
+      </svg>
+      nhaghjoo@gmail.com
+    </a>
+    <a href="https://linkedin.com/in/nhaghjoo" target="_blank">
+      <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+        <rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+      </svg>
+      linkedin.com/in/nhaghjoo
+    </a>
+    <a href="https://scholar.google.com/citations?user=WHfTbaEAAAAJ" target="_blank">
+      <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 14l9-5-9-5-9 5 9 5z"/>
+        <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
+      </svg>
+      Google Scholar
+    </a>
+    <a href="https://github.com/nrhaghjoo" target="_blank">
+      <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+      </svg>
+      github.com/nrhaghjoo
+    </a>
+  </div>
+</aside>
+
+<!-- ── MAIN ──────────────────────────────────────────────────── -->
+<main>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-label">About</div>
+    <div class="hero-headline">Bridging AI<br>and Biology</div>
+    <div class="hero-rule"></div>
+    <p>
+      I am a Postdoctoral Researcher at the <strong>Texas Biomedical Research Institute</strong>
+      in the Host-Pathogen Interaction department, working in
+      <strong>Dr. Diako Ebrahimi's Lab</strong>. My research sits at the intersection of
+      artificial intelligence, statistics, and mathematics — applied to fundamental
+      biological questions in <strong>HIV and cancer</strong>.
+    </p>
+    <p>
+      With a Ph.D. in Bioinformatics and Systems Biology from the University of Tehran,
+      and nearly a decade of combined academic and industry experience, I develop
+      computational tools and analytical pipelines that extract biological insight from
+      complex multi-omics and sequencing data. I am particularly interested in
+      mutational signatures, protein evolution, and machine learning-based biomarker discovery.
+    </p>
+    <div class="tag-group">
+      <span class="tag">Mutational Signatures</span>
+      <span class="tag">Deep Learning</span>
+      <span class="tag">HIV Biology</span>
+      <span class="tag">Cancer Genomics</span>
+      <span class="tag">Multi-Omics Integration</span>
+      <span class="tag">Protein Evolution</span>
+      <span class="tag">NGS Analysis</span>
+      <span class="tag">Statistical Modeling</span>
+    </div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section id="research">
+    <div class="section-label">Current Research</div>
+    <h2>Host-Pathogen Interactions</h2>
+
+    <div class="entry">
+      <div class="entry-year">2024 –<br>present</div>
+      <div class="entry-body">
+        <h3>APOBEC3 Protein Sector Analysis</h3>
+        <div class="entry-where">Texas Biomedical Research Institute · Ebrahimi Lab</div>
+        <p>
+          Applying statistical coupling analysis (SCA) and co-evolutionary methods to identify
+          functional sectors within the APOBEC3 family of proteins — enzymes central to both
+          antiviral restriction and cancer mutagenesis. This work aims to decode how co-evolving
+          residue networks encode distinct biological functions including HIV restriction and
+          tumor mutational burden.
+        </p>
+        <ul>
+          <li>Trinucleotide-context mutation analysis across viral sequence alignments</li>
+          <li>Deep learning for antimicrobial peptide identification from gut microbiome data</li>
+          <li>Integration of evolutionary conservation and co-variation signals</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="section-label">Education</div>
+    <h2>Academic Training</h2>
+
+    <div class="entry">
+      <div class="entry-year">2013 – 2020</div>
+      <div class="entry-body">
+        <h3>Ph.D. — Bioinformatics (Systems Biology)</h3>
+        <div class="entry-where">University of Tehran, Tehran, Iran</div>
+        <p>Dissertation: Computational-based integration of multi-omics data to identify modules
+        in lung adenocarcinoma (LUAD) using systems biology approaches. Identified a panel of
+        prognostic and diagnostic biomarkers validated through survival analysis (Kaplan-Meier,
+        Cox proportional-hazard model) and classification benchmarking.</p>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-year">2011 – 2013</div>
+      <div class="entry-body">
+        <h3>M.Sc. — Computer Engineering (Artificial Intelligence)</h3>
+        <div class="entry-where">Kharazmi University of Tehran, Tehran, Iran</div>
+        <p>Dissertation: Protein-protein interaction prediction based on protein and corresponding
+        genome sequence. Designed feature extraction pipelines using PCA and trained Ensemble
+        Extreme Learning Machine and SVM classifiers.</p>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-year">2005 – 2009</div>
+      <div class="entry-body">
+        <h3>B.Sc. — Applied Chemistry</h3>
+        <div class="entry-where">K. N. Toosi University of Technology, Tehran, Iran</div>
+        <p>Graduated ranked 1st among all students in the Applied Chemistry program.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-label">Experience</div>
+    <h2>Industry & Research</h2>
+
+    <div class="entry">
+      <div class="entry-year">2022 – 2024</div>
+      <div class="entry-body">
+        <h3>Senior Data Scientist</h3>
+        <div class="entry-where">Datis Arian Qeshm Co. (Dotin), Iran</div>
+        <ul>
+          <li>Developed HMM + graph algorithm pipelines for anti-money laundering detection</li>
+          <li>Applied hierarchical clustering with Mahalanobis distance to identify suspicious terminal activity</li>
+          <li>Designed graph-theoretic solutions to prevent money mule fraud</li>
+          <li>Mentored junior data scientists on best practices in analysis and modeling</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-year">2020 – 2022</div>
+      <div class="entry-body">
+        <h3>Data Scientist</h3>
+        <div class="entry-where">MTN Irancell, Iran</div>
+        <ul>
+          <li>Built fuzzy rule-based anomaly detection systems across multiple KPIs</li>
+          <li>Developed personalized bundle recommendation engine for 50M+ subscribers</li>
+          <li>Predicted churn using ensemble methods (Random Forest, XGBoost) with imbalanced class handling</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-year">2016 – 2017</div>
+      <div class="entry-body">
+        <h3>Data Scientist</h3>
+        <div class="entry-where">Rayan Mobin Irsa, Iran</div>
+        <ul>
+          <li>Designed ETL pipelines and learning models for product data extraction</li>
+          <li>Developed image processing applications for color extraction and clustering</li>
+          <li>Implemented color extraction API deployed in production</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section id="publications">
+    <div class="section-label">Publications</div>
+    <h2>Scientific Output</h2>
+    <p>
+      Full publication list available on
+      <a class="inline-link" href="https://scholar.google.com/citations?user=WHfTbaEAAAAJ&hl=en" target="_blank">Google Scholar</a>.
+    </p>
+  </section>
+
+  <!-- TALKS & CONFERENCES -->
+  <section id="talks">
+    <div class="section-label">Talks & Conferences</div>
+    <h2>Presentations</h2>
+
+    <div class="conf-entry">
+      <div class="conf-year-badge">2025</div>
+      <div>
+        <div class="conf-text">Identification of APOBEC3 Protein Sectors in Cancer Through Evolutionary Conservation and Co-variation Analysis</div>
+        <div class="conf-venue">San Antonio Breast Cancer Symposium · Dec 9–12 · San Antonio, TX · Poster</div>
+      </div>
+    </div>
+
+    <div class="conf-entry">
+      <div class="conf-year-badge">2025</div>
+      <div>
+        <div class="conf-text">Statistical Coupling Analysis of APOBEC3 Proteins: Co-Evolving Sectors and Their Impacts on Viral Restriction and Tumor Mutagenesis</div>
+        <div class="conf-venue">Texas Biomedical Research Institute · Mar 3–4 · San Antonio, TX · Poster</div>
+      </div>
+    </div>
+
+    <div class="conf-entry">
+      <div class="conf-year-badge">2025</div>
+      <div>
+        <div class="conf-text">Unraveling APOBEC3 Functional Domains Using Protein Sector Analysis</div>
+        <div class="conf-venue">Mays Cancer Center Symposium · Feb 5 · Greehey Children's Cancer Research Institute · Poster</div>
+      </div>
+    </div>
+
+    <div class="conf-entry">
+      <div class="conf-year-badge">2025</div>
+      <div>
+        <div class="conf-text">Identification of Antimicrobial Peptides from the Human Gut Microbiome Using Deep Learning</div>
+        <div class="conf-venue">Journal Club · Texas Biomedical Research Institute · Talk</div>
+      </div>
+    </div>
+
+    <div class="conf-entry">
+      <div class="conf-year-badge">2025</div>
+      <div>
+        <div class="conf-text">Unraveling APOBEC3 Functional Domains Using Protein Sector Analysis</div>
+        <div class="conf-venue">SAVy · UT Health San Antonio · Talk</div>
+      </div>
+    </div>
+
+    <div class="conf-entry">
+      <div class="conf-year-badge">2021</div>
+      <div>
+        <div class="conf-text">Keynote: Big Data in Health Care</div>
+        <div class="conf-venue">National Webinar Series "Bioinformatics and Systems Biology" · Islamic Azad University · Invited Talk</div>
+      </div>
+    </div>
+
+    <div class="conf-entry">
+      <div class="conf-year-badge">2021</div>
+      <div>
+        <div class="conf-text">Bioinformatics and Artificial Intelligence</div>
+        <div class="conf-venue">Brain and Cognitive Neuroscience Association · Kharazmi University · Invited Talk</div>
+      </div>
+    </div>
+
+    <div class="conf-entry">
+      <div class="conf-year-badge">2019</div>
+      <div>
+        <div class="conf-text">Combining Existing Drugs and Creating New Drugs with the Help of Machine Learning Algorithms</div>
+        <div class="conf-venue">7th Joint Congress of Fuzzy and Intelligent Systems of Iran</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-label">Skills</div>
+    <h2>Technical Expertise</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-card-title">Languages</div>
+        <ul>
+          <li>Python</li>
+          <li>R</li>
+          <li>SQL</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Python Libraries</div>
+        <ul>
+          <li>NumPy / Pandas</li>
+          <li>scikit-learn</li>
+          <li>TensorFlow / PyTorch</li>
+          <li>Biopython</li>
+          <li>OpenCV / matplotlib</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Bioinformatics</div>
+        <ul>
+          <li>NGS Analysis</li>
+          <li>Multi-omics Integration</li>
+          <li>Sequence Alignment</li>
+          <li>Mutational Signatures</li>
+          <li>Protein Evolution (SCA/DCA)</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Machine Learning</div>
+        <ul>
+          <li>Deep Learning</li>
+          <li>Ensemble Methods</li>
+          <li>Clustering</li>
+          <li>Dimensionality Reduction</li>
+          <li>Graph Algorithms</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Databases & Tools</div>
+        <ul>
+          <li>SQL Server / Oracle</li>
+          <li>Power BI</li>
+          <li>Git / GitHub</li>
+          <li>TCGA / TCPA</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- HONORS -->
+  <section id="honors">
+    <div class="section-label">Honors & Awards</div>
+    <h2>Recognition</h2>
+
+    <div class="honor-row">
+      <span class="honor-text">Cowles Fellowship</span>
+      <span class="honor-year">2024</span>
+    </div>
+    <div class="honor-row">
+      <span class="honor-text">Top 2% — National Entrance Examinations for Ph.D. program</span>
+      <span class="honor-year">2013</span>
+    </div>
+    <div class="honor-row">
+      <span class="honor-text">Top 4% — National Entrance Examinations for Master's program</span>
+      <span class="honor-year">2011</span>
+    </div>
+    <div class="honor-row">
+      <span class="honor-text">Ranked 1st among graduates in Applied Chemistry</span>
+      <span class="honor-year">2009</span>
+    </div>
+    <div class="honor-row">
+      <span class="honor-text">Top 1% — National Entrance Examinations for Bachelor's program</span>
+      <span class="honor-year">2005</span>
+    </div>
+    <div class="honor-row">
+      <span class="honor-text">Selected — Regional Round, National Mathematics Olympiad</span>
+      <span class="honor-year">2004</span>
+    </div>
+    <div class="honor-row">
+      <span class="honor-text">Selected — Third Round, National Chemistry Olympiad</span>
+      <span class="honor-year">2003</span>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  // Highlight active nav link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(a => a.classList.remove('active'));
+        const active = document.querySelector(`nav a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
